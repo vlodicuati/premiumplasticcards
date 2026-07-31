@@ -1,0 +1,34 @@
+{{ define "main" }}
+  <!-- 
+    Step 1: Homepage Orchestration
+    This file acts as the primary layout for the homepage (_index.md). 
+    It delegates the actual content rendering to highly modular partials 
+    to maintain a clean architecture and optimize for Lighthouse metrics.
+  -->
+
+  <!-- 
+    Step 1.1: Global Background & Glassmorphism Canvas
+    Added a dark radial gradient and overflow-hidden to contain decorative blobs. 
+    This creates the depth needed for the backdrop-blur elements in the partials.
+  -->
+  <main class="w-full flex flex-col items-center bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-slate-900 via-blue-950 to-black min-h-screen text-slate-100 overflow-hidden relative">
+    
+    <!-- Decorative background lighting effects for depth -->
+    <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-blue-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none"></div>
+    <div class="absolute bottom-[-10%] right-[-10%] w-96 h-96 bg-purple-600 rounded-full mix-blend-screen filter blur-[128px] opacity-20 pointer-events-none"></div>
+
+    <div class="z-10 w-full flex flex-col items-center">
+      <!-- Hero Section: Highly optimized for LCP (Largest Contentful Paint) -->
+      {{ partial "home-hero.html" . }}
+
+      <!-- Comparison Table: The core of the "Proxy Authority" strategy -->
+      {{ partial "comparison-table.html" . }}
+
+      <!-- Features Section: Data-heavy, factual content for AI extraction (GEO) -->
+      {{ partial "features.html" . }}
+      
+      <!-- Coupons Section: Injects active promotions from data/coupons.yaml -->
+      {{ partial "coupons.html" . }}
+    </div>
+  </main>
+{{ end }}
