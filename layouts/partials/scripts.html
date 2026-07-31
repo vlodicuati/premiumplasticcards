@@ -1,0 +1,12 @@
+{{ $options := dict "targetPath" "js/bundle.js" }}
+
+{{/* We will create this main.js file in the assets folder */}}
+{{ $js := resources.Get "js/main.js" }}
+
+{{ if hugo.IsProduction }}
+  {{ $js = $js | js.Build $options | minify | fingerprint }}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{ else }}
+  {{ $js = $js | js.Build $options }}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+{{ end }}

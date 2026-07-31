@@ -1,10 +1,9 @@
 <!-- 
   partials/coupons.html
   Iterates over data/coupons.yaml at build time.
-  Features premium glassmorphism styling and alert-free clipboard interactions.
+  Features premium glassmorphism styling and alert-free clipboard interactions via main.js.
 -->
-
-{{ if .Site.Data.coupons }}
+{{ if hugo.Data.coupons }}
 <section class="relative z-10 my-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
   <div class="text-center mb-16">
     <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 drop-shadow-sm">Exclusive Partner Offers</h2>
@@ -12,7 +11,7 @@
   </div>
   
   <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-    {{ range .Site.Data.coupons }}
+    {{ range hugo.Data.coupons }}
       {{ if eq .active true }}
         <!-- Glassmorphism Card Wrapper -->
         <div class="bg-white/60 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]">
@@ -33,11 +32,16 @@
               <!-- Glassy Input Field -->
               <div class="bg-white/50 backdrop-blur-md border border-white/80 rounded-xl p-3 mb-5 flex justify-between items-center shadow-inner">
                 <span class="font-mono text-slate-800 font-bold tracking-wider text-lg ml-2" id="code-{{ .id }}">{{ .code }}</span>
+                <!-- 
+                  Added coupon-button class and data attributes for main.js to hook into.
+                  Removed inline onclick handler.
+                -->
                 <button 
-                  onclick="copyCouponCode('{{ .code }}', this)" 
-                  class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm active:scale-95"
+                  data-code="{{ .code }}"
+                  data-url="{{ .target_url }}"
+                  class="coupon-button text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm active:scale-95 flex items-center justify-center min-w-[100px]"
                 >
-                  Copy Code
+                  <span>Copy Code</span>
                 </button>
               </div>
               
@@ -52,34 +56,4 @@
     {{ end }}
   </div>
 </section>
-
-<!-- Vanilla JS for Clipboard Copying (No annoying alert boxes) -->
-<script>
-  function copyCouponCode(text, buttonElement) {
-    // 1. Create a temporary textarea to hold the text
-    const el = document.createElement('textarea');
-    el.value = text;
-    document.body.appendChild(el);
-    
-    // 2. Select and copy
-    el.select();
-    document.execCommand('copy');
-    
-    // 3. Clean up
-    document.body.removeChild(el);
-    
-    // 4. Visual Feedback (Swaps classes to show success state)
-    const originalText = buttonElement.innerText;
-    const originalClass = buttonElement.className;
-    
-    buttonElement.innerText = 'Copied! ✓';
-    buttonElement.className = 'text-xs bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-105';
-    
-    // Revert after 2 seconds
-    setTimeout(() => {
-      buttonElement.innerText = originalText;
-      buttonElement.className = originalClass;
-    }, 2000);
-  }
-</script>
 {{ end }}
