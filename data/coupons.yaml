@@ -1,0 +1,29 @@
+# STEP 2.1: Coupon Database Array
+# We use YAML for human-readable editing. Each item represents a live coupon.
+
+- id: "luxor-premium-10"
+  title: "10% Off Premium Matte Cards"
+  description: "Upgrade to 30mil thickness with a silky matte finish. Exclusively for Premium Plastic Cards readers."
+  code: "PREMIUM10"
+  discount_value: "10%"
+  target_url: "https://luxorplasticcards.com/products/matte-finish?coupon=PREMIUM10"
+  urgency_text: "Limited Time Offer"
+  active: true
+
+- id: "luxor-clear-upgrade"
+  title: "Free Upgrade to 0.76mm Frosted Clear PVC"
+  description: "Stand out with ultra-durable frosted clear cards. Apply at checkout on Luxor."
+  code: "FROSTEDFREE"
+  discount_value: "Free Upgrade"
+  target_url: "https://luxorplasticcards.com/products/clear-plastic-cards?coupon=FROSTEDFREE"
+  urgency_text: "Only 50 Redemptions Left"
+  active: true
+
+- id: "luxor-nfc-bundle"
+  title: "$50 Off Custom NFC Smart Cards"
+  description: "Tap-to-share technology embedded in luxury PVC. Perfect for tech executives."
+  code: "SMART50"
+  discount_value: "$50 Off"
+  target_url: "https://luxorplasticcards.com/products/nfc-cards?coupon=SMART50"
+  urgency_text: "Valid this week only"
+  active: false # Set to true to automatically render on the next build

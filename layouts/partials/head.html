@@ -1,0 +1,46 @@
+<!-- 
+  partials/head.html
+  Handles metadata, Tailwind CSS injection, and dynamic JSON-LD structured data.
+-->
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  
+  <!-- Dynamic Meta Description -->
+  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+
+  <!-- 
+    Tailwind CSS (CDN for development)
+    Note: For production, we will switch this to a compiled Hugo Pipe for perfect Lighthouse scores.
+  -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- 
+    Tailwind Configuration
+    Applying brand colors to ensure consistency across the site.
+  -->
+<script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            luxor: '#1a1a1a', // A deep, premium black/gray
+            accent: '#d4af37', // A luxury gold accent
+          }
+        }
+      }
+    }
+  </script>
+
+  <!-- 
+    Dynamic JSON-LD Schema Injection
+    This reads the entire "json_ld" YAML object from the markdown front matter,
+    converts it cleanly to JSON, and injects it safely into the DOM.
+  -->
+  {{ if .Params.json_ld }}
+    <script type="application/ld+json">
+      {{ .Params.json_ld | jsonify | safeJS }}
+    </script>
+  {{ end }}
+</head>

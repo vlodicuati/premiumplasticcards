@@ -1,0 +1,53 @@
+<!-- 
+  STEP 1.1: HTML5 Declaration & Language 
+  Crucial for GEO and traditional SEO. We dynamically pull the language code.
+-->
+<!DOCTYPE html>
+<html lang="{{ site.LanguageCode | default "en-us" }}" class="scroll-smooth">
+  
+  <!-- 
+    STEP 1.2: The Head Partial 
+    This handles all meta tags, the Tailwind CSS injection, and our dynamic JSON-LD Schema.
+  -->
+  {{ partial "head.html" . }}
+
+  <!-- 
+    STEP 1.3: Body Foundation 
+    Tailwind classes applied: min-h-screen ensures the footer stays at the bottom. 
+    antialiased improves font rendering for a premium feel.
+  -->
+  <body class="flex flex-col min-h-screen bg-slate-50 text-slate-900 font-sans antialiased overflow-x-hidden">
+    
+    <!-- 
+      STEP 1.4: Header & Navigation 
+      Isolated partial for easy maintenance. Will contain the logo and main GEO-optimized siloing links.
+    -->
+    {{ partial "header.html" . }}
+
+    <!-- 
+      STEP 1.5: Main Content Wrapper 
+      Semantic <main> tag is mandatory for AI parsers to identify core content.
+      Tailwind classes enforce a max-width and center the content to prevent layout breaking on ultrawide monitors.
+    -->
+    <main id="main-content" class="flex-grow w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <!-- 
+        STEP 1.6: Block 'main' 
+        Hugo will inject the content of list.html or single.html here depending on the route.
+      -->
+      {{ block "main" . }}{{ end }}
+    </main>
+
+    <!-- 
+      STEP 1.7: Footer 
+      Isolated partial. Will contain our proxy-authority disclaimer and final CTA to luxorplasticcards.com.
+    -->
+    {{ partial "footer.html" . }}
+    
+    <!-- 
+      STEP 1.8: Scripts & Final Paint 
+      All non-render-blocking scripts go here to guarantee instant Largest Contentful Paint (LCP).
+    -->
+    {{ partial "scripts.html" . }}
+
+  </body>
+</html>

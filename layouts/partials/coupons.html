@@ -1,0 +1,85 @@
+<!-- 
+  partials/coupons.html
+  Iterates over data/coupons.yaml at build time.
+  Features premium glassmorphism styling and alert-free clipboard interactions.
+-->
+
+{{ if .Site.Data.coupons }}
+<section class="relative z-10 my-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+  <div class="text-center mb-16">
+    <h2 class="text-4xl md:text-5xl font-extrabold text-slate-900 tracking-tight mb-4 drop-shadow-sm">Exclusive Partner Offers</h2>
+    <p class="text-lg text-slate-500 max-w-2xl mx-auto">Unlock premium upgrades and high-volume discounts through our verified manufacturing partners.</p>
+  </div>
+  
+  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+    {{ range .Site.Data.coupons }}
+      {{ if eq .active true }}
+        <!-- Glassmorphism Card Wrapper -->
+        <div class="bg-white/60 backdrop-blur-xl border border-white/60 shadow-[0_8px_30px_rgb(0,0,0,0.04)] rounded-3xl overflow-hidden flex flex-col transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_20px_40px_rgb(0,0,0,0.08)]">
+          
+          <!-- Urgency Banner -->
+          {{ if .urgency_text }}
+          <div class="bg-accent/90 backdrop-blur-md text-luxor font-bold text-xs uppercase tracking-wider py-2.5 px-4 text-center border-b border-accent/20 shadow-sm">
+            {{ .urgency_text }}
+          </div>
+          {{ end }}
+
+          <div class="p-8 flex-grow flex flex-col">
+            <div class="text-accent font-black text-4xl mb-3 drop-shadow-sm">{{ .discount_value }}</div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4 leading-snug">{{ .title }}</h3>
+            <p class="text-slate-600 mb-8 flex-grow leading-relaxed">{{ .description }}</p>
+            
+            <div class="mt-auto">
+              <!-- Glassy Input Field -->
+              <div class="bg-white/50 backdrop-blur-md border border-white/80 rounded-xl p-3 mb-5 flex justify-between items-center shadow-inner">
+                <span class="font-mono text-slate-800 font-bold tracking-wider text-lg ml-2" id="code-{{ .id }}">{{ .code }}</span>
+                <button 
+                  onclick="copyCouponCode('{{ .code }}', this)" 
+                  class="text-xs bg-slate-900 hover:bg-slate-800 text-white font-semibold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-sm active:scale-95"
+                >
+                  Copy Code
+                </button>
+              </div>
+              
+              <!-- Primary CTA -->
+              <a href="{{ .target_url }}" target="_blank" rel="noopener" class="block w-full bg-gradient-to-r from-luxor to-slate-800 hover:from-slate-800 hover:to-luxor text-white text-center font-bold py-4 px-4 rounded-xl transition-all duration-300 shadow-md hover:shadow-lg">
+                Claim Offer at Luxor &rarr;
+              </a>
+            </div>
+          </div>
+        </div>
+      {{ end }}
+    {{ end }}
+  </div>
+</section>
+
+<!-- Vanilla JS for Clipboard Copying (No annoying alert boxes) -->
+<script>
+  function copyCouponCode(text, buttonElement) {
+    // 1. Create a temporary textarea to hold the text
+    const el = document.createElement('textarea');
+    el.value = text;
+    document.body.appendChild(el);
+    
+    // 2. Select and copy
+    el.select();
+    document.execCommand('copy');
+    
+    // 3. Clean up
+    document.body.removeChild(el);
+    
+    // 4. Visual Feedback (Swaps classes to show success state)
+    const originalText = buttonElement.innerText;
+    const originalClass = buttonElement.className;
+    
+    buttonElement.innerText = 'Copied! ✓';
+    buttonElement.className = 'text-xs bg-emerald-500 text-white font-bold py-2.5 px-4 rounded-lg transition-all duration-200 shadow-[0_0_15px_rgba(16,185,129,0.5)] scale-105';
+    
+    // Revert after 2 seconds
+    setTimeout(() => {
+      buttonElement.innerText = originalText;
+      buttonElement.className = originalClass;
+    }, 2000);
+  }
+</script>
+{{ end }}
