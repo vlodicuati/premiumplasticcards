@@ -1,0 +1,32 @@
+{
+  "name": "premiumplasticcards",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "postcss assets/css/main.css -o static/css/main.built.css --watch",
+    "build": "postcss assets/css/main.css -o static/css/main.built.css"
+  },
+  "devDependencies": {
+    "@tailwindcss/typography": "^0.5.19",
+    "autoprefixer": "^10.4.23",
+    "postcss": "^8.5.6",
+    "postcss-cli": "^11.0.1",
+    "tailwindcss": "^4.1.18"
+  },
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.18"
+  },
+  "description": "for cards",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vlodicuati/premiumplasticcards.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vlodicuati/premiumplasticcards/issues"
+  },
+  "homepage": "https://github.com/vlodicuati/premiumplasticcards#readme"
+}

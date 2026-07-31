@@ -1,46 +1,47 @@
 <!-- 
-  partials/head.html
-  Handles metadata, Tailwind CSS injection, and dynamic JSON-LD structured data.
+  STEP 1: Dynamic Meta Tags & SEO Title
+  Ensures responsive viewport control, UTF-8 encoding, and dynamic page titles based on context.
 -->
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
-  
-  <!-- Dynamic Meta Description -->
-  <meta name="description" content="{{ if .Description }}{{ .Description }}{{ else }}{{ .Site.Params.description }}{{ end }}">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+<meta name="description" content="{{ .Description | default .Site.Params.description }}">
 
-  <!-- 
-    Tailwind CSS (CDN for development)
-    Note: For production, we will switch this to a compiled Hugo Pipe for perfect Lighthouse scores.
-  -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- 
-    Tailwind Configuration
-    Applying brand colors to ensure consistency across the site.
-  -->
-<script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            luxor: '#1a1a1a', // A deep, premium black/gray
-            accent: '#d4af37', // A luxury gold accent
-          }
-        }
-      }
-    }
-  </script>
+<!-- 
+  STEP 2: Structured Data (GEO / JSON-LD Injection)
+  Injects custom JSON-LD schemas from front-matter directly into the head for LLM and search engine extraction.
+-->
+{{ if .Params.json_ld_schema }}
+<script type="application/ld+json">
+{{ .Params.json_ld_schema | safeJS }}
+</script>
+{{ end }}
 
-  <!-- 
-    Dynamic JSON-LD Schema Injection
-    This reads the entire "json_ld" YAML object from the markdown front matter,
-    converts it cleanly to JSON, and injects it safely into the DOM.
-  -->
-  {{ if .Params.json_ld }}
-    <script type="application/ld+json">
-      {{ .Params.json_ld | jsonify | safeJS }}
-    </script>
-  {{ end }}
-</head>
+<!-- 
+  STEP 3: LCP & Font Performance Preconnecting
+  Preconnects to Google Fonts to minimize render-blocking and layout shift (CLS/LCP optimization).
+-->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+
+<!-- 
+  STEP 4: Built Tailwind CSS Link
+  Loads the pre-compiled CSS output by PostCSS CLI (static/css/main.built.css), bypassing Hugo's internal pipeline.
+-->
+<link rel="stylesheet" href="/css/main.built.css">
+
+<!-- 
+  STEP 5: Background Styling & Global Reset
+  Sets up the ultra-subtle Apple-style mesh background gradient to maximize the visual pop of glassmorphic panels.
+-->
+<style>
+  body {
+    background-color: #f8fafc;
+    background-image: 
+      radial-gradient(at 0% 0%, rgba(20, 184, 166, 0.05) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, rgba(13, 148, 136, 0.05) 0px, transparent 50%);
+    background-attachment: fixed;
+    min-height: 100vh;
+  }
+</style>

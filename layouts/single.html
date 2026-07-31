@@ -1,0 +1,35 @@
+<!-- layouts/_default/single.html -->
+<!-- 1. INHERITS BASE -->
+{{ define "main" }}
+
+<!-- 2. GLASSMORPHIC CONTENT WRAPPER -->
+<!-- 
+  This container gives the actual text content that Apple-like, 
+  floating frosted glass appearance over the subtle background.
+-->
+<article class="glass-panel rounded-3xl p-8 sm:p-12 md:p-16 shadow-sm mx-auto max-w-4xl mt-8">
+    
+    <!-- 3. HEADER SECTION -->
+    <header class="mb-10 text-center">
+        <h1 class="text-3xl sm:text-4xl md:text-5xl font-bold tracking-tight text-brand-900 mb-4">
+            {{ .Title }}
+        </h1>
+        {{ if .Description }}
+        <p class="text-lg text-brand-600 max-w-2xl mx-auto leading-relaxed">
+            {{ .Description }}
+        </p>
+        {{ end }}
+    </header>
+
+    <!-- 4. TYPOGRAPHY OPTIMIZATION -->
+    <!-- 
+      Using Tailwind Typography plugin (.prose) configured for our refined color palette.
+      Ensures tables, lists, and headings inside markdown are styled elegantly.
+    -->
+    <div class="prose prose-brand prose-lg mx-auto prose-headings:font-semibold prose-a:text-brand-accent hover:prose-a:text-brand-700 prose-img:rounded-xl">
+        {{ .Content }}
+    </div>
+    
+</article>
+
+{{ end }}

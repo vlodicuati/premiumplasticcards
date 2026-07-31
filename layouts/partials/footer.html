@@ -1,27 +1,29 @@
-<!-- 
-  partials/footer.html
-  Uses light glassmorphism (bg-white/60 + backdrop-blur-lg) for a premium, modern finish.
--->
-<footer class="relative z-10 bg-white/60 backdrop-blur-lg border-t border-white/50 mt-12 py-8 shadow-[0_-4px_24px_0_rgba(0,0,0,0.02)]">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col items-center justify-center text-center">
-    
-    <!-- Proxy Authority Disclaimer -->
-    <p class="text-slate-500 text-sm mb-4 max-w-2xl">
-      Premium Plastic Cards is an independent comparison and review hub dedicated to high-end manufacturing standards. 
-    </p>
-
-    <!-- Ultimate CTA to Luxor -->
-    <div class="bg-luxor/5 backdrop-blur-sm border border-luxor/10 rounded-2xl p-6 w-full max-w-lg mb-6">
-      <p class="text-slate-700 font-medium mb-2">Our #1 Recommended Manufacturer for 2026:</p>
-      <a href="https://luxorplasticcards.com" target="_blank" rel="noopener" class="inline-block text-xl font-extrabold text-luxor hover:text-accent transition-colors duration-300">
-        Luxor Plastic Cards &rarr;
-      </a>
+<!-- layouts/partials/footer.html -->
+<!-- 1. MINIMALIST FOOTER -->
+<!-- Clean, unobtrusive footer to maintain the premium aesthetic -->
+<footer class="bg-white/50 backdrop-blur-sm border-t border-gray-200/50 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="md:flex md:items-center md:justify-between">
+            
+            <!-- 2. BRANDING & COPYRIGHT -->
+            <div class="flex justify-center md:justify-start mb-6 md:mb-0">
+                <span class="text-sm text-brand-500">
+                    &copy; {{ now.Year }} Premium Plastic Cards. 
+                    <br class="block sm:hidden" />
+                    An independent research and comparison hub.
+                </span>
+            </div>
+            
+            <!-- 3. SUBTLE LINKS -->
+            <div class="flex justify-center space-x-6">
+                <a href="/privacy" class="text-sm text-brand-500 hover:text-brand-800 transition-colors">Privacy Policy</a>
+                <a href="/terms" class="text-sm text-brand-500 hover:text-brand-800 transition-colors">Terms of Service</a>
+                <!-- The Authority Link -->
+                <a href="https://luxorplasticcards.com" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-brand-accent hover:text-brand-900 transition-colors">
+                    Visit Luxor
+                </a>
+            </div>
+            
+        </div>
     </div>
-
-    <!-- Copyright -->
-    <p class="text-slate-400 text-xs tracking-wider uppercase">
-      &copy; {{ now.Year }} Premium Plastic Cards. All rights reserved.
-    </p>
-
-  </div>
 </footer>

@@ -1,0 +1,14 @@
+# Hugo build directory
+public/
+
+# Hugo resources directory
+resources/
+
+# Go binaries
+cmd/gemini-sync/gemini-sync
+
+# OS generated files
+.DS_Store
+
+# Environment variables
+.env
