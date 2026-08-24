@@ -1,15 +1,63 @@
 <!-- 
   STEP 1: Dynamic Meta Tags & SEO Title
-  Ensures responsive viewport control, UTF-8 encoding, and dynamic page titles based on context.
 -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+<link rel="canonical" href="{{ .Permalink }}">
 
 <!-- 
-  STEP 2: Structured Data (GEO / JSON-LD Injection)
-  Injects custom JSON-LD schemas from front-matter directly into the head for LLM and search engine extraction.
+  STEP 2: Open Graph & Social Media Meta Tags
+  Supports: Facebook, LinkedIn, Twitter/X, Reddit, Slack, Discord, iMessage, Pinterest
+-->
+{{- $ogImage := "" -}}
+{{- if .Params.hero_image -}}
+  {{- $bundledImg := .Resources.GetMatch .Params.hero_image -}}
+  {{- if $bundledImg -}}
+    {{- $ogImage = $bundledImg.Permalink -}}
+  {{- else -}}
+    {{- $ogImage = .Params.hero_image | absURL -}}
+  {{- end -}}
+{{- else -}}
+  {{- $defaultImg := resources.Get "images/og-default.jpg" -}}
+  {{- if $defaultImg -}}
+    {{- $ogImage = $defaultImg.Permalink -}}
+  {{- else -}}
+    {{- $ogImage = "images/og-default.jpg" | absURL -}}
+  {{- end -}}
+{{- end -}}
+
+<!-- Open Graph / Facebook / LinkedIn / Reddit / iMessage -->
+<meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}">
+<meta property="og:url" content="{{ .Permalink }}">
+<meta property="og:title" content="{{ .Title }}">
+<meta property="og:description" content="{{ .Description | default .Site.Params.description }}">
+<meta property="og:site_name" content="{{ .Site.Title }}">
+{{ if $ogImage }}
+<meta property="og:image" content="{{ $ogImage }}">
+<meta property="og:image:alt" content="{{ .Title }}">
+{{ end }}
+
+<!-- Twitter / X Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ .Permalink }}">
+<meta name="twitter:title" content="{{ .Title }}">
+<meta name="twitter:description" content="{{ .Description | default .Site.Params.description }}">
+{{ if $ogImage }}
+<meta name="twitter:image" content="{{ $ogImage }}">
+{{ end }}
+
+<!-- Optional: Article publishing metadata for LinkedIn/FB -->
+{{ if .IsPage }}
+<meta property="article:published_time" content="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ if .Lastmod }}
+<meta property="article:modified_time" content="{{ .Lastmod.Format "2006-01-02T15:04:05Z07:00" }}">
+{{ end }}
+{{ end }}
+
+<!-- 
+  STEP 3: Structured Data (GEO / JSON-LD Injection)
 -->
 {{ if .Params.json_ld_schema }}
 <script type="application/ld+json">
@@ -18,22 +66,19 @@
 {{ end }}
 
 <!-- 
-  STEP 3: LCP & Font Performance Preconnecting
-  Preconnects to Google Fonts to minimize render-blocking and layout shift (CLS/LCP optimization).
+  STEP 4: LCP & Font Performance Preconnecting
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
 <!-- 
-  STEP 4: Built Tailwind CSS Link
-  Loads the pre-compiled CSS output by PostCSS CLI (static/css/main.built.css), bypassing Hugo's internal pipeline.
+  STEP 5: Built Tailwind CSS Link
 -->
 <link rel="stylesheet" href="/css/main.built.css">
 
 <!-- 
-  STEP 5: Background Styling & Global Reset
-  Sets up the ultra-subtle Apple-style mesh background gradient to maximize the visual pop of glassmorphic panels.
+  STEP 6: Background Styling & Global Reset
 -->
 <style>
   body {

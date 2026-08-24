@@ -1,0 +1,108 @@
+{{ define "main" }}
+<main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+
+  <!-- HERO SECTION WITH LARGE WATERMARK BACKGROUND -->
+  <header class="relative mb-16 pb-8 border-b border-slate-200/80 overflow-hidden">
+    <div class="absolute -top-6 -left-2 select-none pointer-events-none opacity-10 font-black text-8xl md:text-9xl text-slate-900 tracking-tighter uppercase">
+      REVIEWS
+    </div>
+    
+    <div class="relative z-10 max-w-3xl">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-blue-100 text-blue-800 text-xs font-black uppercase tracking-widest mb-4">
+        <svg class="w-3.5 h-3.5 text-blue-600" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        2026 Laboratory Audit Directory
+      </div>
+      
+      <h1 class="text-4xl sm:text-6xl font-extrabold text-slate-900 tracking-tight mb-4">
+        {{ .Title }}
+      </h1>
+      
+      {{ with .Description }}
+        <p class="text-lg text-slate-600 leading-relaxed font-medium">{{ . }}</p>
+      {{ end }}
+    </div>
+  </header>
+
+  <!-- DYNAMIC GEO ANSWER CAPSULE FROM HUGO CONTENT -->
+  {{ if .Content }}
+    <article class="prose prose-slate max-w-none mb-14">
+      {{ .Content }}
+    </article>
+  {{ end }}
+
+  <!-- DYNAMIC GRID LOOP (ORIGINAL CARD LOOK - 2 PER ROW) -->
+  <section class="my-12">
+    <h2 class="text-2xl font-extrabold text-slate-900 mb-8 flex items-center gap-3">
+      <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+      </svg>
+      Manufacturer Audit Directory
+    </h2>
+
+    {{/* Fetch all regular pages in /reviews/ section */}}
+    {{ $reviewsSection := .Site.GetPage "section" "reviews" }}
+    {{ $pages := $reviewsSection.RegularPages }}
+
+    {{ if $pages }}
+      <div class="grid md:grid-cols-2 gap-8">
+        {{ range $pages }}
+          {{/* Extract score from front matter params with fallback */}}
+          {{ $cardRating := .Params.rating | default .Params.score | default .Params.review_score | default "4.8" }}
+          
+          <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative">
+            
+            {{/* Hero Image / Header */}}
+            {{ with .Params.hero_image }}
+              <div class="h-48 overflow-hidden bg-slate-100 border-b border-slate-100 relative">
+                <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+              </div>
+            {{ end }}
+
+            <div class="p-6 flex flex-col flex-grow">
+              
+              <!-- FEATURED SCORE BADGE & BRAND HEADER -->
+              <div class="flex items-start justify-between gap-4 mb-4">
+                <div>
+                  {{ with .Params.eyebrow }}
+                    <span class="text-xs font-extrabold uppercase tracking-wider text-blue-600 mb-1 block">{{ . }}</span>
+                  {{ end }}
+                  <h3 class="text-xl font-extrabold text-slate-900 group-hover:text-blue-600 transition-colors leading-snug">
+                    <a href="{{ .RelPermalink }}" class="no-underline text-inherit">{{ .Title }}</a>
+                  </h3>
+                </div>
+
+                <!-- BIG FEATURED RATING DISPLAY -->
+                <div class="bg-slate-900 text-white rounded-xl px-3.5 py-2 flex flex-col items-center justify-center shrink-0 shadow-md border border-slate-800">
+                  <div class="flex items-center gap-1 text-amber-400">
+                    <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+                    <span class="text-lg font-black tracking-tight text-white">{{ $cardRating }}</span>
+                  </div>
+                  <span class="text-[10px] text-slate-400 uppercase font-extrabold tracking-wider mt-0.5">/ 5.0</span>
+                </div>
+              </div>
+
+              <p class="text-slate-600 text-sm leading-relaxed mb-6 flex-grow">
+                {{ .Description | truncate 130 }}
+              </p>
+
+              <div class="pt-4 border-t border-slate-100 flex items-center justify-between mt-auto">
+                <span class="text-xs font-semibold text-slate-400">2026 Audit</span>
+                <a href="{{ .RelPermalink }}" class="inline-flex items-center gap-1.5 text-sm font-bold text-blue-600 hover:text-blue-800 transition-colors no-underline">
+                  Read Full Audit
+                  <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        {{ end }}
+      </div>
+    {{ else }}
+      <p class="text-slate-500 italic">No manufacturer reviews found in this section.</p>
+    {{ end }}
+  </section>
+
+</main>
+{{ end }}

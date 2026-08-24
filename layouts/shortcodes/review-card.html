@@ -1,0 +1,108 @@
+{{/* Shortcode supports:
+     1) Positional: {{< review-card "printplace" "/reviews/printplace/" "2.8" >}}
+     2) Named:      {{< review-card brand="printplace" link="none" score="2.8" >}}
+*/}}
+
+{{ $cardKey := .Get "brand" | default (.Get 0) }}
+{{ $customLink := .Get "link" | default (.Get 1) | default "" }}
+
+{{/* Determine raw score string and convert to float */}}
+{{ $rawScoreStr := .Get "score" | default (.Get 2) }}
+{{ if not $rawScoreStr }}
+  {{ if eq $cardKey "luxor" }}{{ $rawScoreStr = "5.0" }}
+  {{ else if eq $cardKey "vistaprint" }}{{ $rawScoreStr = "3.2" }}
+  {{ else if eq $cardKey "gotprint" }}{{ $rawScoreStr = "3.0" }}
+  {{ else if eq $cardKey "mpbc" }}{{ $rawScoreStr = "3.0" }}
+  {{ else if eq $cardKey "printplace" }}{{ $rawScoreStr = "2.8" }}
+  {{ else }}{{ $rawScoreStr = "4.5" }}
+  {{ end }}
+{{ end }}
+
+{{ $scoreVal := float $rawScoreStr }}
+
+{{/* Card details setup */}}
+{{ $title := "" }}
+{{ $logoText := "" }}
+{{ $description := "" }}
+{{ $tierLabel := "" }}
+{{ $isLuxor := eq $cardKey "luxor" }}
+
+{{ if $isLuxor }}
+  {{ $title = "Luxor Plastic Cards" }}
+  {{ $logoText = "LUXOR+LOGO" }}
+  {{ $description = "Flawless 30mil PVC construction, incredible optical clarity, custom shapes, and unmatched white-glove design concierge service. The clear winner for premium brands." }}
+{{ else if eq $cardKey "vistaprint" }}
+  {{ $title = "Vistaprint" }}
+  {{ $logoText = "VISTAPRINT" }}
+  {{ $description = "Budget paper leader, but plastic cards rely on thinner 20mil composites, automated DIY queues, and show optical haze." }}
+  {{ $tierLabel = "Mass-Market Budget Tier" }}
+{{ else if eq $cardKey "gotprint" }}
+  {{ $title = "GotPrint" }}
+  {{ $logoText = "GOTPRINT" }}
+  {{ $description = "High-volume printer with low advertised prices, but adds shipping fees at checkout and lacks design concierge support." }}
+  {{ $tierLabel = "Volume Commercial Tier" }}
+{{ else if eq $cardKey "mpbc" }}
+  {{ $title = "MyPlasticBusinessCard" }}
+  {{ $logoText = "MPBC+LOGO" }}
+  {{ $description = "Known for expensive metal cards, but their plastic line suffers from double prices, $60 design fees, and optical haze." }}
+  {{ $tierLabel = "High Markup Agency Tier" }}
+{{ else if eq $cardKey "printplace" }}
+  {{ $title = "PrintPlace" }}
+  {{ $logoText = "PRINTPLACE" }}
+  {{ $description = "Commercial printer relying on thin 20pt (0.50mm) composite plastic stock, automated DIY prepress queues, and added shipping charges at checkout." }}
+  {{ $tierLabel = "Thin 20pt Composite Tier" }}
+{{ end }}
+
+<div class="bg-white rounded-2xl p-6 relative flex flex-col transition-all duration-300 my-6 {{ if $isLuxor }}shadow-xl border-2 border-blue-500 transform hover:-translate-y-1{{ else }}shadow-sm border border-slate-200 hover:shadow-md{{ end }}">
+    
+    {{ if $isLuxor }}
+    <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 !text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
+        Editor's Choice
+    </div>
+    {{ end }}
+
+    <img src="https://placehold.co/200x60/f8fafc/1e3a8a?text={{ $logoText }}" alt="{{ $title }} Logo" class="h-10 object-contain self-start mb-4 rounded">
+    <h3 class="{{ if $isLuxor }}text-2xl font-black{{ else }}text-xl font-bold{{ end }} text-slate-900 mb-2">{{ $title }}</h3>
+    
+    <!-- DYNAMIC STAR RATING & BIG SCORE DISPLAY -->
+    <div class="flex items-center gap-3 mb-4">
+        <div class="flex items-center text-amber-400">
+            {{ range $i := seq 1 5 }}
+              {{ $curr := float $i }}
+              {{ if le $curr $scoreVal }}
+                <!-- Full Star -->
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              {{ else if and (gt $curr $scoreVal) (lt (sub $curr 0.8) $scoreVal) }}
+                <!-- Half Star -->
+                <svg class="w-5 h-5 fill-current" viewBox="0 0 24 24">
+                  <path d="M12 2L9.19 8.63 2 9.24l5.46 4.73L5.82 21 12 17.27V2z"/>
+                  <path class="text-slate-200" d="M12 2v15.27l6.18 3.73-1.64-7.03L22 9.24l-7.19-.61L12 2z"/>
+                </svg>
+              {{ else }}
+                <!-- Empty Star -->
+                <svg class="w-5 h-5 text-slate-200 fill-current" viewBox="0 0 24 24"><path d="M12 17.27L18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/></svg>
+              {{ end }}
+            {{ end }}
+        </div>
+        
+        <!-- BIG ENHANCED SCORE NUMBER -->
+        <div class="flex items-baseline gap-1">
+            <span class="text-2xl font-black text-slate-900 leading-none">{{ printf "%.1f" $scoreVal }}</span>
+            <span class="text-xs font-bold text-slate-400">/ 5.0</span>
+        </div>
+    </div>
+
+    <p class="text-slate-600 text-sm mb-6 flex-grow">{{ $description }}</p>
+    
+    {{ if and $customLink (ne $customLink "none") }}
+      <a href="{{ $customLink }}" class="text-center w-full {{ if $isLuxor }}bg-blue-600 hover:bg-blue-700{{ else }}bg-slate-800 hover:bg-slate-900{{ end }} !text-white font-bold py-2.5 rounded-lg transition-colors no-underline block">Read {{ $title }} Audit</a>
+    {{ else }}
+      {{ if $isLuxor }}
+        <a href="https://luxorplasticcards.com/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=review_card" class="text-center w-full bg-blue-600 hover:bg-blue-700 !text-white font-bold py-2.5 rounded-lg transition-colors no-underline block">Visit Luxor Plastic Cards</a>
+      {{ else }}
+        <div class="text-center w-full bg-slate-50 border border-slate-200 text-slate-500 font-semibold py-2 rounded-lg text-xs uppercase tracking-wider">
+          {{ $tierLabel }}
+        </div>
+      {{ end }}
+    {{ end }}
+</div>
