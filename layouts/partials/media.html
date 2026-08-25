@@ -1,0 +1,30 @@
+{{/* layouts/partials/media.html */}}
+{{ $src := .src }}
+{{ $alt := .alt | default "Premium luxury plastic cards" }}
+{{ $class := .class | default "w-full h-auto rounded-xl shadow-lg border border-gray-100" }}
+{{ $loading := .loading | default "lazy" }}
+{{ $size := .size | default "800x webp q85" }}
+
+{{ $image := resources.Get $src }}
+
+{{ if $image }}
+  {{ $webp := $image.Resize $size }}
+  {{ $fallback := $image.Resize "800x q85" }}
+
+  <picture>
+    <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
+    <img 
+      src="{{ $fallback.RelPermalink }}" 
+      alt="{{ $alt }}" 
+      class="{{ $class }}"
+      width="{{ $image.Width }}" 
+      height="{{ $image.Height }}"
+      loading="{{ $loading }}"
+      decoding="async"
+    >
+  </picture>
+{{ else }}
+  <div class="bg-red-50 text-red-800 p-4 rounded-xl border-2 border-red-400 font-bold my-4 text-xs">
+    Error: Image asset '{{ $src }}' not found in /assets/images/.
+  </div>
+{{ end }}

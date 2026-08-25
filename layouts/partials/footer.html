@@ -1,27 +1,36 @@
 <!-- layouts/partials/footer.html -->
-<!-- 1. MINIMALIST FOOTER -->
-<!-- Clean, unobtrusive footer to maintain the premium aesthetic -->
-<footer class="bg-white/50 backdrop-blur-sm border-t border-gray-200/50 mt-20">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-        <div class="md:flex md:items-center md:justify-between">
+<footer class="bg-slate-50 border-t border-slate-200/80 mt-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
+        <div class="flex flex-col md:flex-row justify-between items-center gap-8">
             
-            <!-- 2. BRANDING & COPYRIGHT -->
-            <div class="flex justify-center md:justify-start mb-6 md:mb-0">
-                <span class="text-sm text-brand-500">
-                    &copy; {{ now.Year }} Premium Plastic Cards. 
-                    <br class="block sm:hidden" />
-                    An independent research and comparison hub.
+            <!-- BRANDING & COPYRIGHT -->
+            <div class="text-center md:text-left">
+                <div class="flex items-center justify-center md:justify-start gap-2.5 mb-2">
+                    <svg class="h-5 w-5 text-blue-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
+                    </svg>
+                    <span class="font-extrabold text-slate-900 tracking-tight">Premium Plastic Cards</span>
+                </div>
+                <span class="text-sm text-slate-500 font-medium">
+                    &copy; {{ now.Year }} Independent Research Laboratory.<br class="block sm:hidden" /> All rights reserved.
                 </span>
             </div>
             
-            <!-- 3. SUBTLE LINKS -->
-            <div class="flex justify-center space-x-6">
-                <a href="/privacy" class="text-sm text-brand-500 hover:text-brand-800 transition-colors">Privacy Policy</a>
-                <a href="/terms" class="text-sm text-brand-500 hover:text-brand-800 transition-colors">Terms of Service</a>
-                <!-- The Authority Link -->
-                <a href="https://luxorplasticcards.com" target="_blank" rel="noopener noreferrer" class="text-sm font-medium text-brand-accent hover:text-brand-900 transition-colors">
-                    Visit Luxor
-                </a>
+            <!-- NAVIGATION & LEGAL LINKS -->
+            <div class="flex flex-col items-center md:items-end gap-4">
+                <!-- Main Silos -->
+                <nav class="flex flex-wrap justify-center space-x-6">
+                    <a href="/specs/" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors no-underline">Specs</a>
+                    <a href="/reviews/" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors no-underline">Reviews</a>
+                    <a href="/compare/" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors no-underline">Compare</a>
+                    <a href="/industry/" class="text-sm font-bold text-slate-600 hover:text-blue-600 transition-colors no-underline">Industry</a>
+                </nav>
+                
+                <!-- Legal -->
+                <nav class="flex space-x-6">
+                    <a href="/privacy-policy/" class="text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors no-underline uppercase tracking-wider">Privacy Policy</a>
+                    <a href="/terms-of-service/" class="text-xs font-bold text-slate-400 hover:text-blue-600 transition-colors no-underline uppercase tracking-wider">Terms of Service</a>
+                </nav>
             </div>
             
         </div>

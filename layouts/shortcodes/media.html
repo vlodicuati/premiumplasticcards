@@ -1,42 +1,16 @@
-<!-- 
-  layouts/shortcodes/media.html
-  
-  STEP 1: Variable Initialization
-  We extract parameters passed by the content writer. If they forget an alt tag, 
-  we inject a highly relevant GEO-optimized fallback.
--->
+<!-- layouts/shortcodes/media.html -->
 {{ $src := .Get "src" }}
 {{ $alt := .Get "alt" | default "Premium luxury plastic cards" }}
 {{ $class := .Get "class" | default "w-full h-auto rounded-xl shadow-lg border border-gray-100" }}
-
-<!-- We default to lazy loading, but allow 'eager' for above-the-fold LCP images -->
 {{ $loading := .Get "loading" | default "lazy" }}
+{{ $size := .Get "size" | default "800x webp q85" }}
 
-<!-- 
-  STEP 2: Asset Resolution
-  We grab the image from the Hugo /assets/ directory so Hugo Pipes can manipulate it.
-  (Important: Your raw images MUST go in the 'assets' folder, not the 'static' folder, for this to work).
--->
 {{ $image := resources.Get $src }}
 
 {{ if $image }}
-  <!-- 
-    STEP 3: Image Processing & WebP Generation
-    We dynamically resize the image to a sensible maximum width (800px) to prevent 
-    massive file downloads, and we convert it to the highly optimized WebP format.
-  -->
-  {{ $webp := $image.Resize "800x webp q85" }}
-  
-  <!-- We also generate a standard fallback for ancient browsers -->
+  {{ $webp := $image.Resize $size }}
   {{ $fallback := $image.Resize "800x q85" }}
 
-  <!-- 
-    STEP 4: DOM Injection (<picture> Element)
-    We use the <picture> tag to serve the WebP file to modern browsers.
-    CRITICAL SEO RULE: We explicitly inject the original $image.Width and $image.Height 
-    into the HTML attributes. This reserves the exact space on the screen before the image 
-    loads, ensuring absolutely zero Cumulative Layout Shift (CLS).
-  -->
   <picture>
     <source srcset="{{ $webp.RelPermalink }}" type="image/webp">
     <img 
@@ -49,13 +23,7 @@
       decoding="async"
     >
   </picture>
-
 {{ else }}
-  <!-- 
-    STEP 5: Graceful Error Handling
-    If you type the wrong image name in your markdown, this prevents the build from breaking
-    and renders a bright red error box so you can immediately spot the typo in development.
-  -->
   <div class="bg-red-50 text-red-800 p-4 rounded-xl border-2 border-red-400 font-bold my-4">
     Error: The image asset '{{ $src }}' could not be found in your /assets/ directory.
   </div>
