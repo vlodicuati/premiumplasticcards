@@ -5,22 +5,22 @@
 -->
 
 <!-- 1. FADING PARALLAX EDITORIAL BACKDROP -->
-<!-- Pulls a hero image from the Page Bundle, processes it for fast loading, and adds native CSS parallax. -->
+<!-- Pulls a hero image from Global Assets (assets/), processes it for fast loading, and adds native CSS parallax. -->
 <div class="absolute top-0 left-0 w-full h-[65vh] z-0 pointer-events-none select-none bg-slate-50">
     {{ $bgImage := "" }}
     
-    <!-- Try to find the image in the Page Bundle based on front matter 'hero_image' -->
+    <!-- Grab the image from the assets/ folder based on front matter 'hero_image' -->
     {{ if .Params.hero_image }}
-        {{ $bgImage = .Resources.GetMatch .Params.hero_image }}
+        {{ $bgImage = resources.Get .Params.hero_image }}
     {{ end }}
 
-    <!-- If found in the bundle, process it. -->
+    <!-- If found, process it. -->
     {{ if $bgImage }}
         <!-- Resizes to a max width of 1920px, converts to WebP, and sets quality to 80% -->
         {{ $processedBg := $bgImage.Resize "1920x webp q80" }}
         
         <!-- We use inline style for bg-image to enable bg-fixed parallax natively, injecting the optimized WebP -->
-        <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-40 transition-opacity duration-500" 
+        <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-90 transition-opacity duration-500" 
              style="background-image: url('{{ $processedBg.RelPermalink }}');"></div>
     {{ else }}
         <!-- Global Fallback -->
@@ -33,7 +33,7 @@
     {{ end }}
     
     <!-- Gradient overlay: barely visible at top so the image pops, fading to solid white at the bottom to blend with the page -->
-    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/50 to-white"></div>
+    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/30 to-white"></div>
 </div>
 
 <!-- 2. MAIN CONTENT WRAPPER -->

@@ -6,25 +6,29 @@
 <title>{{ if .IsHome }}{{ .Site.Title }}{{ else }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
 <meta name="description" content="{{ .Description | default .Site.Params.description }}">
 <link rel="canonical" href="{{ .Permalink }}">
-
 <!-- 
   STEP 2: Open Graph & Social Media Meta Tags
   Supports: Facebook, LinkedIn, Twitter/X, Reddit, Slack, Discord, iMessage, Pinterest
 -->
 {{- $ogImage := "" -}}
+
+<!-- Look for the hero image in the assets/ folder -->
 {{- if .Params.hero_image -}}
-  {{- $bundledImg := .Resources.GetMatch .Params.hero_image -}}
-  {{- if $bundledImg -}}
-    {{- $ogImage = $bundledImg.Permalink -}}
-  {{- else -}}
-    {{- $ogImage = .Params.hero_image | absURL -}}
+  {{- $assetImg := resources.Get .Params.hero_image -}}
+  
+  {{- if $assetImg -}}
+    <!-- Crop to standard OG dimensions (1200x630), convert to WebP, and get the absolute URL -->
+    {{- $processedOg := $assetImg.Fill "1200x630 webp q80" -}}
+    {{- $ogImage = $processedOg.Permalink -}}
   {{- end -}}
-{{- else -}}
+{{- end -}}
+
+<!-- Global Fallback (if no hero_image is set, or if it wasn't found) -->
+{{- if not $ogImage -}}
   {{- $defaultImg := resources.Get "images/og-default.jpg" -}}
   {{- if $defaultImg -}}
-    {{- $ogImage = $defaultImg.Permalink -}}
-  {{- else -}}
-    {{- $ogImage = "images/og-default.jpg" | absURL -}}
+    {{- $processedDefault := $defaultImg.Fill "1200x630 webp q80" -}}
+    {{- $ogImage = $processedDefault.Permalink -}}
   {{- end -}}
 {{- end -}}
 

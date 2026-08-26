@@ -123,32 +123,8 @@ If you are upgrading to plastic to project high-ticket authority, you must bypas
 
 More importantly, Luxor eliminates the DIY template trap. Every single order is assigned to a dedicated <a href="https://luxorplasticcards.com/designs/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=vista_review_design" class="text-blue-600 hover:text-blue-800 font-semibold underline">in-house design concierge</a>. They will manually inspect your artwork, properly configure the white ink layers for clear plastics, and send you a completely free digital vector proof for your approval before a single card is manufactured. 
 
-<!-- REDESIGNED INTERACTIVE PROMO CODE BLOCK WITH IMAGE -->
-<div class="my-14 bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col lg:flex-row items-center">
-<div class="p-8 sm:p-10 lg:w-3/5">
-<div class="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
-2026 Winner Upgrade
-</div>
-<h3 class="text-3xl font-extrabold text-slate-900 mb-4 mt-0 leading-tight">Claim Your Exclusive Partner Pricing</h3>
-<p class="text-slate-600 text-lg m-0 leading-relaxed mb-8">
-Ready to bypass the budget printers? Use our technical board's exclusive partner link to claim an additional <strong>5% off</strong> your factory-direct 30mil PVC order at Luxor.
-</p>
-<div class="flex flex-col sm:flex-row items-center gap-4">
-<button onclick="navigator.clipboard.writeText('XP5'); alert('Promo code XP5 copied to clipboard!');" class="w-full sm:w-auto bg-slate-50 border-2 border-dashed border-blue-300 text-blue-700 font-mono font-bold text-xl px-8 py-3.5 rounded-xl hover:bg-blue-50 transition-colors flex items-center justify-center gap-3 group focus:outline-none">
-XP5
-<svg class="w-5 h-5 text-blue-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012-2v-8a2 2 0 01-2-2h-8a2 2 0 01-2 2v8a2 2 0 012 2z"></path></svg>
-</button>
-</div>
-</div>
-<div class="w-full lg:w-2/5 bg-slate-50 p-8 sm:p-10 border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col items-center justify-center h-full">
-<img src="/images/luxor-promo-cards.png" alt="Stack of premium Luxor plastic business cards" class="w-full max-w-[250px] h-auto object-cover rounded-xl shadow-lg mb-8 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-<a href="https://luxorplasticcards.com/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=promo_code&coupon=XP5" class="w-full px-8 py-4 bg-red-600 hover:bg-red-700 !text-white font-extrabold rounded-xl shadow-md transition-all text-center no-underline hover:!text-white text-lg">
-Apply Code & Shop
-</a>
-<p class="text-xs text-slate-500 mt-4 font-medium uppercase tracking-wider text-center">Includes Free US Shipping</p>
-</div>
-</div>
-<!-- END PROMO BLOCK -->
+
+{{< promo-block >}}
 
 ---
 

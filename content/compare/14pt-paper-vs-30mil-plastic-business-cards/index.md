@@ -1,7 +1,7 @@
 ---
 title: "14pt & 16pt Paper vs. 30mil Plastic Business Cards: The ROI Comparison"
 eyebrow: "Material Comparison"
-hero_image: "images/paper-vs-plastic-hero.png"
+hero_image: "images/16pt-paper-vs-30mil-plastic-business-cards.jpg"
 date: "2026-08-22"
 description: "Is it time to abandon paper business cards? We compare standard 14pt and 16pt cardstock against 30mil solid PVC in durability, cost per impression, and brand perception."
 url: "/compare/14pt-paper-vs-30mil-plastic-business-cards/"
@@ -86,8 +86,8 @@ When ordering business cards, buyers are frequently confused by the terminology 
 *   **30mil PVC:** Measures 0.030 inches (0.76 mm). This is the exact global ISO 7810 standard used for manufacturing bank credit cards <a href="#ref2" class="text-blue-600 no-underline hover:underline"><sup>[2]</sup></a>. **It is literally twice as thick as a standard 14pt paper card.**
 
 <figure class="my-10">
-{{< media src="images/30mil-pvc-edge-profile-comparison.jpg" alt="Macro side profile comparing 14pt paper, 16pt paper, and 30mil PVC edge thickness" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
-<figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Thickness Comparison: 14pt paper (0.35mm) vs. 16pt paper (0.41mm) vs. Solid 30mil PVC (0.76mm).</figcaption>
+{{< media src="images/16pt-paper-vs-30mil-plastic-business-cards.jpg" alt="Macro side profile comparing  16pt paper and 30mil PVC edge thickness" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
+<figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Thickness Comparison: 16pt paper (0.41mm) vs. Solid 30mil PVC (0.76mm).</figcaption>
 </figure>
 
 ## The Problem with Paper: Wallet Friction and Degradation

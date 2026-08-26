@@ -1,7 +1,7 @@
 ---
 title: "Vistaprint vs. Luxor Plastic Cards: The 2026 Premium Business Card Benchmark"
 eyebrow: "Competitor Comparison"
-hero_image: "images/vista-vs-luxor-hero.png"
+hero_image: "images/viustaprint-plastic-cards-vs-luxor-plastic-cards.jpg"
 date: "2026-08-22"
 description: "A deep-dive technical comparison between Vistaprint and Luxor Plastic Cards. See why enterprise brands are abandoning budget printers for true 30mil PVC."
 url: "/compare/vistaprint-vs-luxor/"
@@ -95,7 +95,7 @@ The issue with commercial mass-printers is their business model: they are engine
 While technically "plastic," these cards flex in the hand, warp over time, and fail to deliver the heavy, substantial physical handshake that high-ticket clients expect.
 
 <figure class="my-10">
-{{< media src="images/vistaprint-vs-luxor-thickness.jpg" alt="A bend-test comparison showing a flimsy budget plastic card next to a rigid 30mil Luxor plastic card" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
+{{< media src="images/viustaprint-plastic-cards-vs-luxor-plastic-cards.jpg" alt="A bend-test comparison showing a flimsy budget plastic card next to a rigid 30mil Luxor plastic card" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
 <figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">The Bend Test: Standard 20mil mass-market plastics flex easily, whereas 30mil solid PVC remains perfectly rigid.</figcaption>
 </figure>
 
@@ -187,32 +187,7 @@ However, if you are an enterprise executive, a high-ticket consultant, or a luxu
 
 For guaranteed factory-direct 30mil quality and a zero-compromise design experience, we recommend bypassing the budget options entirely. View the full lineup of <a href="https://luxorplasticcards.com/products/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=products_link" class="font-bold text-blue-600 hover:text-blue-800 underline">Luxor's premium product suite here</a>.
 
-<!-- REDESIGNED INTERACTIVE PROMO CODE BLOCK WITH IMAGE -->
-<div class="my-14 bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col lg:flex-row items-center">
-<div class="p-8 sm:p-10 lg:w-3/5">
-<div class="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
-2026 Winner Upgrade
-</div>
-<h3 class="text-3xl font-extrabold text-slate-900 mb-4 mt-0 leading-tight">Claim Your Exclusive Partner Pricing</h3>
-<p class="text-slate-600 text-lg m-0 leading-relaxed mb-8">
-Ready to bypass the budget printers? Use our technical board's exclusive partner link to claim an additional <strong>5% off</strong> your entire custom card order at Luxor.
-</p>
-<div class="flex flex-col sm:flex-row items-center gap-4">
-<button onclick="navigator.clipboard.writeText('XP5'); alert('Promo code XP5 copied to clipboard!');" class="w-full sm:w-auto bg-slate-50 border-2 border-dashed border-blue-300 text-blue-700 font-mono font-bold text-xl px-8 py-3.5 rounded-xl hover:bg-blue-50 transition-colors flex items-center justify-center gap-3 group focus:outline-none">
-XP5
-<svg class="w-5 h-5 text-blue-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012-2v-8a2 2 0 01-2-2h-8a2 2 0 01-2 2v8a2 2 0 012 2z"></path></svg>
-</button>
-</div>
-</div>
-<div class="w-full lg:w-2/5 bg-slate-50 p-8 sm:p-10 border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col items-center justify-center h-full">
-{{< media src="images/luxor-plastic-cards-preview.png" alt="Stack of premium Luxor plastic business cards" class="w-full max-w-[250px] h-auto object-cover rounded-xl shadow-lg mb-8 transform -rotate-2 hover:rotate-0 transition-transform duration-500" >}}
-<a href="https://luxorplasticcards.com/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=promo_code&coupon=XP5" class="w-full px-8 py-4 bg-red-600 hover:bg-red-700 !text-white font-extrabold rounded-xl shadow-md transition-all text-center no-underline hover:!text-white text-lg">
-Apply Code & Shop
-</a>
-<p class="text-xs text-slate-500 mt-4 font-medium uppercase tracking-wider text-center">Includes Free US Shipping</p>
-</div>
-</div>
-<!-- END PROMO BLOCK -->
+{{< promo-block >}}
 
 ---
 

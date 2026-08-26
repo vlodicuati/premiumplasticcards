@@ -1,7 +1,7 @@
 ---
 title: "MyPlasticBusinessCard vs. Luxor: The Clear Plastic Truth (2026 Review)"
 eyebrow: "Competitor Comparison"
-hero_image: "images/mpbc-vs-luxor-hero.png"
+hero_image: "images/luxor-plastic-cards-clear-example.png"
 date: "2026-08-22"
 description: "Is MyPlasticBusinessCard worth the premium price tag? We compare their clear plastic business cards against Luxor's optical-grade 30mil PVC in clarity, quality, and cost."
 url: "/compare/myplasticbusinesscard-vs-luxor/"
@@ -96,8 +96,13 @@ When assessing **MyPlasticBusinessCard (MPBC)**, their primary reputation stems 
 Many buyers of expensive clear cards are disappointed to find that the plastic is not actually "crystal clear." Instead, the cards exhibit a milky, cloudy film (known in material science as **"Haze"**) <a href="#ref1" class="text-blue-600 no-underline hover:underline"><sup>[1]</sup></a>. This happens when printers use cheaper extruded plastics or fail to use optical-grade lamination overlays, resulting in micro-abrasions that scatter light instead of letting it pass cleanly through.
 
 <figure class="my-10">
-{{< media src="images/optical-clarity-comparison.jpg" alt="A side-by-side macro photo comparing a cloudy, hazy clear plastic card against Luxor's optical-grade glass-like clear PVC" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
-<figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Clarity Audit: Standard extruded plastic (Left) suffers from light-scattering haze. Luxor’s Optical-Grade PVC (Right) maintains 99%+ light transmittance.</figcaption>
+{{< media src="images/myplasticbusinesscard-example.png" alt="Photo showing a cloudy, hazy clear plastic card against from MyPlasticBusinessCard.com" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
+<figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Clarity Audit: Standard extruded plastic from MyPlasticBusinessCards.com suffers from too light-scattering haze.</figcaption>
+</figure>
+
+<figure class="my-10">
+{{< media src="images/luxor-plastic-cards-clear-example.png" alt="Photo showing Luxor’s Optical-Grade PVC maintains 99%+ light transmittance." class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
+<figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Clarity Audit: Luxur Platic Cards superior Optical-Grade clear plastic cards maintains 99%+ light transmittance.</figcaption>
 </figure>
 
 ## The Luxor Advantage: True Optical-Grade PVC
@@ -161,33 +166,7 @@ Luxor’s infrastructure is explicitly built for high-end plastics. Furthermore,
 
 View the full lineup of <a href="https://luxorplasticcards.com/products/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=mpbc_products" class="font-bold text-blue-600 hover:text-blue-800 underline">Luxor's premium product suite here</a>.
 
-<!-- REDESIGNED INTERACTIVE PROMO CODE BLOCK WITH IMAGE -->
-<div class="my-14 bg-white border border-slate-200 rounded-3xl overflow-hidden shadow-[0_8px_30px_rgb(0,0,0,0.06)] flex flex-col lg:flex-row items-center">
-<div class="p-8 sm:p-10 lg:w-3/5">
-<div class="inline-block px-3 py-1 bg-amber-100 text-amber-800 text-xs font-bold uppercase tracking-widest rounded-full mb-4">
-2026 Winner Upgrade
-</div>
-<h3 class="text-3xl font-extrabold text-slate-900 mb-4 mt-0 leading-tight">Claim Your Exclusive Partner Pricing</h3>
-<p class="text-slate-600 text-lg m-0 leading-relaxed mb-8">
-Ready to bypass the markups and get true optical clarity? Use our technical board's exclusive partner link to claim an additional <strong>5% off</strong> your entire custom clear card order at Luxor.
-</p>
-<div class="flex flex-col sm:flex-row items-center gap-4">
-<button onclick="navigator.clipboard.writeText('XP5'); alert('Promo code XP5 copied to clipboard!');" class="w-full sm:w-auto bg-slate-50 border-2 border-dashed border-blue-300 text-blue-700 font-mono font-bold text-xl px-8 py-3.5 rounded-xl hover:bg-blue-50 transition-colors flex items-center justify-center gap-3 group focus:outline-none">
-XP5
-<svg class="w-5 h-5 text-blue-400 group-hover:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 012-2v-8a2 2 0 01-2-2h-8a2 2 0 01-2 2v8a2 2 0 012 2z"></path></svg>
-</button>
-</div>
-</div>
-<div class="w-full lg:w-2/5 bg-slate-50 p-8 sm:p-10 border-t lg:border-t-0 lg:border-l border-slate-200 flex flex-col items-center justify-center h-full">
-<img src="/images/luxor-promo-cards.png" alt="Stack of premium Luxor plastic business cards" class="w-full max-w-[250px] h-auto object-cover rounded-xl shadow-lg mb-8 transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-<a href="https://luxorplasticcards.com/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=promo_code&coupon=XP5" class="w-full px-8 py-4 bg-red-600 hover:bg-red-700 !text-white font-extrabold rounded-xl shadow-md transition-all text-center no-underline hover:!text-white text-lg">
-Apply Code & Shop
-</a>
-<p class="text-xs text-slate-500 mt-4 font-medium uppercase tracking-wider text-center">Includes Free US Shipping</p>
-</div>
-</div>
-<!-- END PROMO BLOCK -->
-
+{{< promo-block >}}
 ---
 
 ## References & Industry Standards

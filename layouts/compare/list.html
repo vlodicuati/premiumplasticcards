@@ -39,13 +39,22 @@
         {{ range $pages }}
           <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative">
             
-            {{/* Hero Image or Visual Header */}}
-            {{ with .Params.hero_image }}
-              <div class="h-48 overflow-hidden bg-slate-100 border-b border-slate-100 relative">
-                <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-              </div>
-            {{ end }}
+{{/* Hero Image or Visual Header */}}
+{{ with .Params.hero_image }}
+  {{/* Grab the image from the assets folder */}}
+  {{ $cardImg := resources.Get . }}
+  
+  {{/* Ensure the image exists to prevent build errors */}}
+  {{ with $cardImg }}
+    {{/* Crop to a uniform size for the grid, convert to WebP */}}
+    {{ $processedCardImg := .Fill "800x600 webp q80" }}
+    
+    <div class="h-48 overflow-hidden bg-slate-100 border-b border-slate-100 relative">
+      <img src="{{ $processedCardImg.RelPermalink }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
+    </div>
+  {{ end }}
+{{ end }}
 
             <div class="p-6 flex flex-col flex-grow">
               

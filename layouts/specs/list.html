@@ -39,12 +39,21 @@
         {{ range $pages }}
           <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group">
             
-            {{/* Hero Image */}}
-            {{ with .Params.hero_image }}
-              <div class="h-48 overflow-hidden bg-slate-100">
-                <img src="{{ . | relURL }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-              </div>
-            {{ end }}
+{{/* Hero Image */}}
+{{ with .Params.hero_image }}
+  {{/* Grab the image from the assets folder */}}
+  {{ $previewImg := resources.Get . }}
+  
+  {{/* Ensure the image exists to prevent build errors */}}
+  {{ with $previewImg }}
+    {{/* Crop to a uniform size for the grid, convert to WebP */}}
+    {{ $processedPreview := .Fill "800x600 webp q80" }}
+    
+    <div class="h-48 overflow-hidden bg-slate-100">
+      <img src="{{ $processedPreview.RelPermalink }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+    </div>
+  {{ end }}
+{{ end }}
 
             <div class="p-6 flex flex-col flex-grow">
               {{ with .Params.eyebrow }}
