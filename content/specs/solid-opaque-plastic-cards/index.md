@@ -1,7 +1,7 @@
 ---
 title: "Solid Opaque Plastic Cards: Technical Specification & Printing Guide"
 eyebrow: "Material Specifications"
-hero_image: "images/solid-plastic-specs-hero.png"
+hero_image: "images/solid-opaque-plastic-business-cards.png"
 date: "2026-08-22"
 description: "Complete technical specifications for 30mil solid opaque plastic cards. Learn about core pigment density, CMYK double-sided printing, magnetic stripes, and RFID integration."
 url: "/specs/solid-plastic-cards/"
@@ -99,7 +99,7 @@ A standard **30mil (0.76mm)** solid opaque card is manufactured by thermally fus
 This fused composite creates an unbendable, 100% waterproof **30mil (760 micron)** card conforming precisely to the **ISO/IEC 7810 ID-1 (CR80)** standard <a href="#ref2" class="text-blue-600 no-underline hover:underline"><sup>[2]</sup></a>.
 
 <figure class="my-10">
-{{< media src="images/solid-pvc-core-cross-section.jpg" alt="Macro diagram showing the internal multi-layer thermal lamination of a 30mil solid opaque PVC card" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
+{{< media src="images/plastic-business-card-cross-section.jpg" alt="Macro diagram showing the internal multi-layer thermal lamination of a 30mil solid opaque PVC card" class="w-full h-auto rounded-2xl shadow-md border border-slate-200 block" >}}
 <figcaption class="text-center text-sm text-slate-500 mt-4 font-medium">Cross-Section Engineering: Multi-layer core sheets fused under thermal pressure seal ink beneath protective clear overlays.</figcaption>
 </figure>
 

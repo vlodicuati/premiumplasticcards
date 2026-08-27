@@ -1,7 +1,8 @@
 ---
 title: "GotPrint Plastic Business Cards Review: The True Cost of 'Budget' Printing (2026)"
 eyebrow: "Manufacturer Review"
-hero_image: "images/gotprint-review-hero.png"
+hero_image: "images/gotprint-logo.png"
+accent_color: "#8ec63e"
 date: "2026-08-22"
 description: "An objective 2026 review of GotPrint's plastic business cards. We evaluate their material quality, hidden shipping costs, and DIY design tools against luxury standard Luxor Plastic Cards."
 url: "/reviews/gotprint/"

@@ -1,39 +1,47 @@
 {{ define "main" }}
 <!-- 
   PREMIUM B2B SINGLE LAYOUT
-  Features: Editorial backdrop, Native Web Share, Dynamic Eyebrow, CSS Grid
+  Features: Editorial backdrop, Native Web Share, Dynamic Eyebrow, CSS Grid, Review Logic
 -->
 
-<!-- 1. FADING PARALLAX EDITORIAL BACKDROP -->
-<!-- Pulls a hero image from Global Assets (assets/), processes it for fast loading, and adds native CSS parallax. -->
+<!-- 1. FADING PARALLAX EDITORIAL BACKDROP OR REVIEW ACCENT -->
 <div class="absolute top-0 left-0 w-full h-[65vh] z-0 pointer-events-none select-none bg-slate-50">
-    {{ $bgImage := "" }}
     
-    <!-- Grab the image from the assets/ folder based on front matter 'hero_image' -->
-    {{ if .Params.hero_image }}
-        {{ $bgImage = resources.Get .Params.hero_image }}
-    {{ end }}
-
-    <!-- If found, process it. -->
-    {{ if $bgImage }}
-        <!-- Resizes to a max width of 1920px, converts to WebP, and sets quality to 80% -->
-        {{ $processedBg := $bgImage.Resize "1920x webp q80" }}
-        
-        <!-- We use inline style for bg-image to enable bg-fixed parallax natively, injecting the optimized WebP -->
-        <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-90 transition-opacity duration-500" 
-             style="background-image: url('{{ $processedBg.RelPermalink }}');"></div>
+    {{ if .Params.rating }}
+        <!-- REVIEW PAGE: Solid Accent Color Background -->
+<div class="absolute inset-0 transition-opacity duration-500" style="background-color: {{ .Params.accent_color | default "#0f172a" | safeCSS }};"></div>
+        <!-- Gradient overlay: fades the solid color to white at the bottom to blend with the page -->
+        <div class="absolute inset-0 bg-gradient-to-b from-transparent via-white/50 to-white"></div>
     {{ else }}
-        <!-- Global Fallback -->
-        {{ $fallback := resources.Get "images/default-hero-bg.jpg" }}
-        {{ if $fallback }}
-            {{ $processedFallback := $fallback.Resize "1920x webp q80" }}
-            <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-40 transition-opacity duration-500" 
-                 style="background-image: url('{{ $processedFallback.RelPermalink }}');"></div>
+        <!-- STANDARD PAGE: Fading Parallax Image -->
+        {{ $bgImage := "" }}
+        
+        <!-- Grab the image from the assets/ folder based on front matter 'hero_image' -->
+        {{ if .Params.hero_image }}
+            {{ $bgImage = resources.Get .Params.hero_image }}
         {{ end }}
+
+        <!-- If found, process it. -->
+        {{ if $bgImage }}
+            <!-- Resizes to a max width of 1920px, converts to WebP, and sets quality to 80% -->
+            {{ $processedBg := $bgImage.Resize "1920x webp q80" }}
+            
+            <!-- We use inline style for bg-image to enable bg-fixed parallax natively, injecting the optimized WebP -->
+            <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-90 transition-opacity duration-500" 
+                 style="background-image: url('{{ $processedBg.RelPermalink }}');"></div>
+        {{ else }}
+            <!-- Global Fallback -->
+            {{ $fallback := resources.Get "images/default-hero-bg.jpg" }}
+            {{ if $fallback }}
+                {{ $processedFallback := $fallback.Resize "1920x webp q80" }}
+                <div class="absolute inset-0 bg-fixed bg-center bg-cover opacity-40 transition-opacity duration-500" 
+                     style="background-image: url('{{ $processedFallback.RelPermalink }}');"></div>
+            {{ end }}
+        {{ end }}
+        
+        <!-- Gradient overlay: barely visible at top so the image pops, fading to solid white at the bottom to blend with the page -->
+        <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/30 to-white"></div>
     {{ end }}
-    
-    <!-- Gradient overlay: barely visible at top so the image pops, fading to solid white at the bottom to blend with the page -->
-    <div class="absolute inset-0 bg-gradient-to-b from-white/10 via-white/30 to-white"></div>
 </div>
 
 <!-- 2. MAIN CONTENT WRAPPER -->
@@ -81,13 +89,26 @@
                     </div>
                     
                     <!-- Native Share Button -->
-                    <!-- Tries to use the native iOS/Android/macOS share sheet. Falls back to clipboard copy if unsupported. -->
                     <button onclick="if(navigator.share){navigator.share({title:'{{ .Title }}',url:window.location.href})}else{navigator.clipboard.writeText(window.location.href);alert('Link copied to clipboard!')}" 
                             class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-slate-200 shadow-sm text-slate-600 hover:text-slate-900 hover:bg-slate-50 hover:border-slate-300 hover:shadow transition-all text-sm font-semibold group cursor-pointer">
                         <svg class="w-4 h-4 text-slate-400 group-hover:text-blue-500 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
                         Share
                     </button>
                 </div>
+
+                <!-- NEW: Dynamic Logo for Reviews -->
+                {{ if .Params.rating }}
+                    {{ with .Params.hero_image }}
+                        {{ $logoImg := resources.Get . }}
+                        {{ with $logoImg }}
+                            <!-- We use .Fit here to ensure wide/tall logos are sized correctly without cropping -->
+                            {{ $processedLogo := .Fit "600x500 webp q90" }}
+                            <div class="mb-6">
+                                <img src="{{ $processedLogo.RelPermalink }}" alt="{{ $.Title }} Logo" class="h-34 w-auto object-contain">
+                            </div>
+                        {{ end }}
+                    {{ end }}
+                {{ end }}
 
                 <!-- Main Title -->
                 <h1 class="text-4xl sm:text-5xl font-extrabold tracking-tight text-slate-900 mb-6 leading-[1.15]">

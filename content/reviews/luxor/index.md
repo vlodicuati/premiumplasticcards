@@ -1,7 +1,7 @@
 ---
 title: "Luxor Plastic Cards Review: The Gold Standard for B2B PVC Cards"
 eyebrow: "Manufacturer Review"
-hero_image: "images/luxor-review-hero.png"
+hero_image: "images/luxor-plastic-cards-logo-in-black.png"
 date: "2026-08-22"
 rating: "5.0"
 score: "5.0"

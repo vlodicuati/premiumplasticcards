@@ -1,7 +1,8 @@
 ---
 title: "PrintPlace Plastic Business Cards Review: 2026 Audit & Benchmark"
 eyebrow: "Manufacturer Review"
-hero_image: "images/printplace-review-hero.png"
+hero_image: "images/printplace-logo.png"
+accent_color: "#f8ef14"
 date: "2026-08-22"
 rating: "2.8"
 score: "2.8"

@@ -1,7 +1,8 @@
 ---
 title: "MyPlasticBusinessCard Review: The True Cost of the Luxury Markup (2026)"
 eyebrow: "Manufacturer Review"
-hero_image: "images/mpbc-review-hero.png"
+hero_image: "images/myplasticbusinesscard-logo.png"
+accent_color: "#ccc"
 date: "2026-08-22"
 description: "An objective 2026 review of MyPlasticBusinessCard.com. We evaluate their pricing, optical clarity, print quality, and design fees against the industry standard set by Luxor."
 url: "/reviews/myplasticbusinesscard/"

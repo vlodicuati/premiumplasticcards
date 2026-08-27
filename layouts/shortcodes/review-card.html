@@ -23,6 +23,7 @@
 {{/* Card details setup */}}
 {{ $title := "" }}
 {{ $logoText := "" }}
+{{ $logoPath := "" }}
 {{ $description := "" }}
 {{ $tierLabel := "" }}
 {{ $isLuxor := eq $cardKey "luxor" }}
@@ -30,30 +31,36 @@
 {{ if $isLuxor }}
   {{ $title = "Luxor Plastic Cards" }}
   {{ $logoText = "LUXOR+LOGO" }}
+  {{ $logoPath = "images/luxor-plastic-cards-logo-in-black.png" }}
   {{ $description = "Flawless 30mil PVC construction, incredible optical clarity, custom shapes, and unmatched white-glove design concierge service. The clear winner for premium brands." }}
 {{ else if eq $cardKey "vistaprint" }}
   {{ $title = "Vistaprint" }}
   {{ $logoText = "VISTAPRINT" }}
+  {{ $logoPath = "images/vistaprint-logo.png" }}
   {{ $description = "Budget paper leader, but plastic cards rely on thinner 20mil composites, automated DIY queues, and show optical haze." }}
   {{ $tierLabel = "Mass-Market Budget Tier" }}
 {{ else if eq $cardKey "gotprint" }}
   {{ $title = "GotPrint" }}
   {{ $logoText = "GOTPRINT" }}
+  {{ $logoPath = "images/gotprint-logo.png" }}
   {{ $description = "High-volume printer with low advertised prices, but adds shipping fees at checkout and lacks design concierge support." }}
   {{ $tierLabel = "Volume Commercial Tier" }}
 {{ else if eq $cardKey "mpbc" }}
   {{ $title = "MyPlasticBusinessCard" }}
   {{ $logoText = "MPBC+LOGO" }}
+  {{ $logoPath = "images/myplasticbusinesscard-logo.png" }}
   {{ $description = "Known for expensive metal cards, but their plastic line suffers from double prices, $60 design fees, and optical haze." }}
   {{ $tierLabel = "High Markup Agency Tier" }}
 {{ else if eq $cardKey "printplace" }}
   {{ $title = "PrintPlace" }}
   {{ $logoText = "PRINTPLACE" }}
+  {{ $logoPath = "images/printplace-logo.png" }}
   {{ $description = "Commercial printer relying on thin 20pt (0.50mm) composite plastic stock, automated DIY prepress queues, and added shipping charges at checkout." }}
   {{ $tierLabel = "Thin 20pt Composite Tier" }}
 {{ end }}
 
-<div class="bg-white rounded-2xl p-6 relative flex flex-col transition-all duration-300 my-6 {{ if $isLuxor }}shadow-xl border-2 border-blue-500 transform hover:-translate-y-1{{ else }}shadow-sm border border-slate-200 hover:shadow-md{{ end }}">
+<!-- Card wrapper corners reduced to rounded-lg -->
+<div class="bg-white rounded-lg p-6 relative flex flex-col transition-all duration-300 my-6 {{ if $isLuxor }}shadow-xl border-2 border-blue-500 transform hover:-translate-y-1{{ else }}shadow-sm border border-slate-200 hover:shadow-md{{ end }}">
     
     {{ if $isLuxor }}
     <div class="absolute top-0 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-blue-600 !text-white text-[10px] font-bold px-3 py-1 rounded-full uppercase tracking-wide shadow-sm">
@@ -61,7 +68,21 @@
     </div>
     {{ end }}
 
-    <img src="https://placehold.co/200x60/f8fafc/1e3a8a?text={{ $logoText }}" alt="{{ $title }} Logo" class="h-10 object-contain self-start mb-4 rounded">
+    <!-- DYNAMIC LOGO PROCESSING -->
+    {{ $logoImg := "" }}
+    {{ if $logoPath }}
+        {{ $logoImg = resources.Get $logoPath }}
+    {{ end }}
+    
+    {{ if $logoImg }}
+        <!-- Resized to a wide format so it spans w-full cleanly -->
+        {{ $processedLogo := $logoImg.Resize "800x webp q90" }}
+        <img src="{{ $processedLogo.RelPermalink }}" alt="{{ $title }} Logo" class="w-full h-auto object-contain mb-5 rounded-md border border-slate-100 shadow-sm">
+    {{ else }}
+        <!-- Fallback now uses a wider placeholder dimension to match w-full -->
+        <img src="https://placehold.co/800x300/f8fafc/1e3a8a?text={{ $logoText }}" alt="{{ $title }} Logo" class="w-full h-auto object-contain mb-5 rounded-md border border-slate-100 shadow-sm">
+    {{ end }}
+    
     <h3 class="{{ if $isLuxor }}text-2xl font-black{{ else }}text-xl font-bold{{ end }} text-slate-900 mb-2">{{ $title }}</h3>
     
     <!-- DYNAMIC STAR RATING & BIG SCORE DISPLAY -->
@@ -100,7 +121,7 @@
       {{ if $isLuxor }}
         <a href="https://luxorplasticcards.com/?utm_source=premiumplasticcards&utm_medium=referral&utm_campaign=review_card" class="text-center w-full bg-blue-600 hover:bg-blue-700 !text-white font-bold py-2.5 rounded-lg transition-colors no-underline block">Visit Luxor Plastic Cards</a>
       {{ else }}
-        <div class="text-center w-full bg-slate-50 border border-slate-200 text-slate-500 font-semibold py-2 rounded-lg text-xs uppercase tracking-wider">
+        <div class="text-center w-full bg-slate-50 border border-slate-200 text-slate-500 font-semibold py-2 rounded-md text-xs uppercase tracking-wider">
           {{ $tierLabel }}
         </div>
       {{ end }}

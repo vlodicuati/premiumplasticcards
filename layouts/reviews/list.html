@@ -51,22 +51,21 @@
           
           <div class="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-xl transition-all duration-300 flex flex-col overflow-hidden group relative">
             
-{{/* Hero Image / Header */}}
-{{ with .Params.hero_image }}
-  {{/* Grab the image from the assets folder */}}
-  {{ $headerImg := resources.Get . }}
-  
-  {{/* Ensure the image exists to prevent build errors */}}
-  {{ with $headerImg }}
-    {{/* Crop to a uniform size for the grid, convert to WebP */}}
-    {{ $processedHeader := .Fill "800x600 webp q80" }}
-    
-    <div class="h-48 overflow-hidden bg-slate-100 border-b border-slate-100 relative">
-      <img src="{{ $processedHeader.RelPermalink }}" alt="{{ $.Title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
-      <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-transparent"></div>
-    </div>
-  {{ end }}
-{{ end }}
+            {{/* Hero Image / Header */}}
+            {{ with .Params.hero_image }}
+              {{/* Grab the image from the assets folder */}}
+              {{ $headerImg := resources.Get . }}
+              
+              {{/* Ensure the image exists to prevent build errors */}}
+              {{ with $headerImg }}
+                {{/* Resize to a standard width, maintaining natural height, convert to WebP */}}
+                {{ $processedHeader := .Resize "800x webp q90" }}
+                
+                <div class="bg-slate-100 border-b border-slate-100 relative overflow-hidden">
+                  <img src="{{ $processedHeader.RelPermalink }}" alt="{{ $.Title }}" class="w-full h-auto block group-hover:scale-105 transition-transform duration-500">
+                </div>
+              {{ end }}
+            {{ end }}
 
             <div class="p-6 flex flex-col flex-grow">
               

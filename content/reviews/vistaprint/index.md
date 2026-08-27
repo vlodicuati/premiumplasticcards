@@ -1,8 +1,9 @@
 ---
 title: "Vistaprint Plastic Business Cards Review (2026 Benchmark)"
 eyebrow: "Manufacturer Review"
-hero_image: "images/vistaprint-review-hero.png"
+hero_image: "images/vistaprint-logo.png"
 date: "2026-08-22"
+accent_color: "#6fcff5"
 description: "An objective 2026 review of Vistaprint's plastic business cards. We evaluate their flexible and rigid plastic options, optical clarity, and design templates against industry standards."
 url: "/reviews/vistaprint/"
 layout: "single"
